@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoltMart — Give EV Parts a Second Life</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">⚡</div>
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
+      </div>
+      <p>Powering up...</p>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo" onclick="showPage('landing')">
+        <span class="logo-icon">⚡</span>
+        <span>Volt <strong>Mart</strong></span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" onclick="showPage('landing')" class="nav-link active" data-page="landing">Home</a></li>
+        <li><a href="#" onclick="showPage('browse')" class="nav-link" data-page="browse">Browse Parts</a></li>
+        <li><a href="#" onclick="showPage('sell')" class="nav-link" data-page="sell">Sell Parts</a></li>
+        <li><a href="#" onclick="showPage('about')" class="nav-link" data-page="about">About</a></li>
+        <li><a href="#" onclick="showPage('dashboard')" class="nav-link" data-page="dashboard">Dashboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <button class="btn-ghost" onclick="openModal('login')">Login</button>
+        <button class="btn-primary" onclick="openModal('signup')">Sign Up</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGES WRAPPER -->
+  <main id="app">
+
+    <!-- ==================== LANDING PAGE ==================== -->
+    <section id="page-landing" class="page active">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-bg">
+          <div class="hero-orb orb1"></div>
+          <div class="hero-orb orb2"></div>
+          <div class="hero-grid"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-badge">♻️ Sustainable EV Ecosystem</div>
+          <h1 class="hero-title">Give EV Parts<br /><em>a Second Life</em></h1>
+          <p class="hero-sub">The trusted marketplace for used electric vehicle components. Buy, sell, and recycle EV
+            parts — smarter, greener, faster.</p>
+          <div class="hero-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="heroSearch" placeholder="Search batteries, motors, chargers..." />
+            <button class="btn-primary" onclick="doHeroSearch()">Search</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>12,400+</strong><span>Parts Listed</span></div>
+            <div class="stat-div"></div>
+            <div class="stat"><strong>3,800+</strong><span>Sellers</span></div>
+            <div class="stat-div"></div>
+            <div class="stat"><strong>98%</strong><span>Satisfaction</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-card-float card-f1">
+            <span>🔋</span>
+            <div><strong>Tesla Battery Pack</strong>
+              <p>₹2,40,000 · Like New</p>
+            </div>
+          </div>
+          <div class="hero-card-float card-f2">
+            <span>⚡</span>
+            <div><strong>Motor Verified</strong>
+              <p>Rating 4.9★</p>
+            </div>
+          </div>
+          <div class="hero-card-float card-f3">
+            <span>♻️</span>
+            <div><strong>CO₂ Saved</strong>
+              <p>840 kg this month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <section class="section categories-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Browse by Category</h2>
+            <p>Find exactly what your EV needs</p>
+          </div>
+          <div class="categories-grid">
+            <div class="cat-card" onclick="filterCategory('Battery')">
+              <div class="cat-icon">🔋</div>
+              <h3>Batteries</h3>
+              <span>1,240 parts</span>
+            </div>
+            <div class="cat-card" onclick="filterCategory('Motor')">
+              <div class="cat-icon">⚙️</div>
+              <h3>Motors</h3>
+              <span>890 parts</span>
+            </div>
+            <div class="cat-card" onclick="filterCategory('Charger')">
+              <div class="cat-icon">🔌</div>
+              <h3>Chargers</h3>
+              <span>674 parts</span>
+            </div>
+            <div class="cat-card" onclick="filterCategory('Controller')">
+              <div class="cat-icon">🖥️</div>
+              <h3>Controllers</h3>
+              <span>412 parts</span>
+            </div>
+            <div class="cat-card" onclick="filterCategory('Tire')">
+              <div class="cat-icon">🛞</div>
+              <h3>Tires</h3>
+              <span>530 parts</span>
+            </div>
+            <div class="cat-card cat-card-all" onclick="showPage('browse')">
+              <div class="cat-icon">🔎</div>
+              <h3>All Parts</h3>
+              <span>View all →</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED LISTINGS -->
+      <section class="section featured-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Featured Listings</h2>
+            <a href="#" onclick="showPage('browse')" class="view-all">View all →</a>
+          </div>
+          <div class="products-grid" id="featuredGrid"></div>
+        </div>
+      </section>
+
+      <!-- SUSTAINABILITY BANNER -->
+      <section class="section sustain-section">
+        <div class="container">
+          <div class="sustain-card">
+            <div class="sustain-text">
+              <div class="sustain-badge">🌍 Our Impact</div>
+              <h2>Every Part Saved is a Planet Preserved</h2>
+              <p>EV batteries contain lithium, cobalt, and nickel — precious materials that shouldn't end up in
+                landfills. By reselling and reusing EV components, our community has collectively prevented over
+                <strong>840 tonnes of CO₂ equivalent</strong> emissions this year alone.
+              </p>
+              <button class="btn-primary" onclick="showPage('about')">Learn More</button>
+            </div>
+            <div class="sustain-stats">
+              <div class="s-stat"><span class="s-num">840t</span><span class="s-label">CO₂ Prevented</span></div>
+              <div class="s-stat"><span class="s-num">12k+</span><span class="s-label">Parts Recycled</span></div>
+              <div class="s-stat"><span class="s-num">60%</span><span class="s-label">Cost Savings vs New</span></div>
+              <div class="s-stat"><span class="s-num">94</span><span class="s-label">Cities Covered</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="section how-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>How It Works</h2>
+            <p>Three simple steps to buy or sell</p>
+          </div>
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-num">01</div>
+              <h3>List or Search</h3>
+              <p>Create a free listing or search from thousands of verified EV parts in seconds.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step-card">
+              <div class="step-num">02</div>
+              <h3>Connect & Verify</h3>
+              <p>Chat with sellers, review ratings, and verify part compatibility before buying.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step-card">
+              <div class="step-num">03</div>
+              <h3>Ship or Pickup</h3>
+              <p>Arrange secure shipping or local pickup. Payment protected until delivery confirmed.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </section><!-- /LANDING -->
+
+    <!-- ==================== BROWSE PAGE ==================== -->
+    <section id="page-browse" class="page">
+      <div class="page-hero-mini">
+        <div class="container">
+          <h1>Browse EV Parts</h1>
+          <p>Thousands of verified used parts, ready to ship</p>
+        </div>
+      </div>
+      <div class="container browse-layout">
+        <!-- FILTERS SIDEBAR -->
+        <aside class="filters-sidebar" id="filterSidebar">
+          <div class="filter-header">
+            <h3>Filters</h3>
+            <button onclick="resetFilters()" class="reset-btn">Reset</button>
+          </div>
+
+          <div class="filter-group">
+            <label>Search</label>
+            <div class="filter-search-wrap">
+              <span>🔍</span>
+              <input type="text" id="browseSearch" placeholder="Part name..." oninput="applyFilters()" />
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Category</label>
+            <div class="checkbox-list" id="categoryFilters">
+              <label class="check-item"><input type="checkbox" value="Battery" onchange="applyFilters()"><span>🔋
+                  Battery</span></label>
+              <label class="check-item"><input type="checkbox" value="Motor" onchange="applyFilters()"><span>⚙️
+                  Motor</span></label>
+              <label class="check-item"><input type="checkbox" value="Charger" onchange="applyFilters()"><span>🔌
+                  Charger</span></label>
+              <label class="check-item"><input type="checkbox" value="Controller" onchange="applyFilters()"><span>🖥️
+                  Controller</span></label>
+              <label class="check-item"><input type="checkbox" value="Tire" onchange="applyFilters()"><span>🛞
+                  Tire</span></label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Price Range</label>
+            <div class="price-range">
+              <input type="number" id="priceMin" placeholder="Min ₹" oninput="applyFilters()" />
+              <span>—</span>
+              <input type="number" id="priceMax" placeholder="Max ₹" oninput="applyFilters()" />
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label>Condition</label>
+            <select id="conditionFilter" onchange="applyFilters()">
+              <option value="">All Conditions</option>
+              <option value="Like New">Like New</option>
+              <option value="Good">Good</option>
+              <option value="Fair">Fair</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Vehicle Type</label>
+            <select id="vehicleFilter" onchange="applyFilters()">
+              <option value="">All Vehicles</option>
+              <option value="Tesla">Tesla</option>
+              <option value="Nissan">Nissan Leaf</option>
+              <option value="Chevy">Chevy Bolt</option>
+              <option value="BMW">BMW iX</option>
+              <option value="Hyundai">Hyundai Ioniq</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>City / Location</label>
+            <select id="locationFilter" onchange="applyFilters()">
+              <option value="">🇮🇳 All India</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Bengaluru">Bengaluru</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Pune">Pune</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Kolkata">Kolkata</option>
+            </select>
+          </div>
+        </aside>
+
+        <!-- PRODUCTS AREA -->
+        <div class="browse-main">
+          <div class="browse-topbar">
+            <span id="resultCount">Showing all parts</span>
+            <div class="sort-wrap">
+              <select id="sortSelect" onchange="applyFilters()">
+                <option value="default">Sort: Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating">Best Rated</option>
+              </select>
+            </div>
+          </div>
+          <div class="products-grid" id="browseGrid"></div>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </section><!-- /BROWSE -->
+
+    <!-- ==================== SELL PAGE ==================== -->
+    <section id="page-sell" class="page">
+      <div class="page-hero-mini">
+        <div class="container">
+          <h1>Sell Your EV Parts</h1>
+          <p>List in minutes. Reach thousands of buyers nationwide.</p>
+        </div>
+      </div>
+      <div class="container sell-layout">
+        <div class="sell-form-wrap">
+          <div class="sell-steps-indicator">
+            <div class="sell-step active" data-step="1"><span>1</span> Part Info</div>
+            <div class="sell-step" data-step="2"><span>2</span> Details</div>
+            <div class="sell-step" data-step="3"><span>3</span> Photos</div>
+          </div>
+
+          <form id="sellForm" class="sell-form" novalidate>
+
+            <!-- STEP 1 -->
+            <div class="form-step active" id="formStep1">
+              <h3>Basic Information</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Part Name *</label>
+                  <input type="text" id="partName" placeholder="e.g. Tesla Model 3 Battery Pack" />
+                  <span class="form-error" id="err-partName"></span>
+                </div>
+                <div class="form-group">
+                  <label>Category *</label>
+                  <select id="partCategory">
+                    <option value="">Select category</option>
+                    <option>Battery</option>
+                    <option>Motor</option>
+                    <option>Charger</option>
+                    <option>Controller</option>
+                    <option>Tire</option>
+                    <option>Other</option>
+                  </select>
+                  <span class="form-error" id="err-partCategory"></span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Vehicle Compatibility *</label>
+                  <input type="text" id="partVehicle" placeholder="e.g. Tesla Model 3 2019-2022" />
+                  <span class="form-error" id="err-partVehicle"></span>
+                </div>
+                <div class="form-group">
+                  <label>Condition *</label>
+                  <select id="partCondition">
+                    <option value="">Select condition</option>
+                    <option>Like New</option>
+                    <option>Good</option>
+                    <option>Fair</option>
+                  </select>
+                  <span class="form-error" id="err-partCondition"></span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Price (₹) *</label>
+                  <input type="number" id="partPrice" placeholder="0" min="1" />
+                  <span class="form-error" id="err-partPrice"></span>
+                </div>
+                <div class="form-group">
+                  <label>City / Location *</label>
+                  <select id="partLocation">
+                    <option value="">Select city</option>
+                    <option>Mumbai</option>
+                    <option>Delhi</option>
+                    <option>Bengaluru</option>
+                    <option>Chennai</option>
+                    <option>Hyderabad</option>
+                    <option>Pune</option>
+                    <option>Ahmedabad</option>
+                    <option>Kolkata</option>
+                  </select>
+                  <span class="form-error" id="err-partLocation"></span>
+                </div>
+              </div>
+              <div class="form-nav"><button type="button" class="btn-primary" onclick="nextStep(1)">Continue →</button>
+              </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="form-step" id="formStep2">
+              <h3>Part Details</h3>
+              <div class="form-group full">
+                <label>Description *</label>
+                <textarea id="partDesc" rows="5"
+                  placeholder="Describe the part's condition, history, any defects, reason for selling..."></textarea>
+                <span class="form-error" id="err-partDesc"></span>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Year of Part</label>
+                  <input type="number" id="partYear" placeholder="e.g. 2020" min="2010" max="2025" />
+                </div>
+                <div class="form-group">
+                  <label>Mileage (miles)</label>
+                  <input type="number" id="partMileage" placeholder="e.g. 45000" min="0" />
+                </div>
+              </div>
+              <div class="form-group full">
+                <label>Shipping Options</label>
+                <div class="checkbox-row">
+                  <label class="check-item"><input type="checkbox" id="shipLocal"> <span>Local Pickup</span></label>
+                  <label class="check-item"><input type="checkbox" id="shipNational"> <span>National
+                      Shipping</span></label>
+                </div>
+              </div>
+              <div class="form-nav">
+                <button type="button" class="btn-ghost" onclick="prevStep(2)">← Back</button>
+                <button type="button" class="btn-primary" onclick="nextStep(2)">Continue →</button>
+              </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="form-step" id="formStep3">
+              <h3>Upload Photos</h3>
+              <div class="upload-zone" id="uploadZone" onclick="document.getElementById('photoUpload').click()">
+                <div class="upload-icon">📷</div>
+                <p>Click or drag photos here</p>
+                <small>JPG, PNG up to 10MB each · Max 8 photos</small>
+                <input type="file" id="photoUpload" multiple accept="image/*" style="display:none"
+                  onchange="handlePhotos(this)" />
+              </div>
+              <div class="photo-preview" id="photoPreview"></div>
+              <div class="form-group full" style="margin-top:1.5rem">
+                <label class="check-item agree-check">
+                  <input type="checkbox" id="agreeTerms" />
+                  <span>I confirm this part is accurately described and I agree to the <a href="#">Terms of
+                      Service</a></span>
+                </label>
+                <span class="form-error" id="err-agreeTerms"></span>
+              </div>
+              <div class="form-nav">
+                <button type="button" class="btn-ghost" onclick="prevStep(3)">← Back</button>
+                <button type="submit" class="btn-primary btn-large">🚀 List My Part</button>
+              </div>
+            </div>
+
+          </form>
+
+          <!-- SUCCESS STATE -->
+          <div id="sellSuccess" class="sell-success hidden">
+            <div class="success-icon">🎉</div>
+            <h2>Your Part is Listed!</h2>
+            <p>Your listing is now live and visible to thousands of buyers. We'll notify you when someone shows
+              interest.</p>
+            <div class="success-actions">
+              <button class="btn-primary" onclick="showPage('browse')">Browse Parts</button>
+              <button class="btn-ghost" onclick="resetSellForm()">List Another Part</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="sell-tips">
+          <h3>💡 Listing Tips</h3>
+          <ul>
+            <li>✅ Use clear, high-res photos from multiple angles</li>
+            <li>✅ Include part numbers and OEM references</li>
+            <li>✅ Be honest about condition and any defects</li>
+            <li>✅ State vehicle compatibility precisely</li>
+            <li>✅ Respond quickly to buyer messages</li>
+          </ul>
+          <div class="sell-tip-card">
+            <strong>⚡ Pro Sellers earn more</strong>
+            <p>Verified sellers with complete profiles sell 3x faster. Add your credentials!</p>
+          </div>
+        </aside>
+      </div>
+    </section><!-- /SELL -->
+
+    <!-- ==================== PRODUCT DETAIL PAGE ==================== -->
+    <section id="page-product" class="page">
+      <div class="container" style="padding-top:2rem">
+        <button class="back-btn" onclick="showPage('browse')">← Back to Browse</button>
+        <div id="productDetailContent"></div>
+      </div>
+    </section>
+
+    <!-- ==================== DASHBOARD PAGE ==================== -->
+    <section id="page-dashboard" class="page">
+      <div class="page-hero-mini">
+        <div class="container">
+          <h1>My Dashboard</h1>
+          <p>Manage your listings, saved parts, and messages</p>
+        </div>
+      </div>
+      <div class="container dashboard-layout">
+        <aside class="dash-sidebar">
+          <div class="dash-profile" id="dashProfile">
+            <div class="dash-avatar">?</div>
+            <div><strong>Loading...</strong><span>—</span></div>
+          </div>
+          <nav class="dash-nav">
+            <a href="#" class="dash-link active" onclick="switchTab('listings', this)">📦 My Listings</a>
+            <a href="#" class="dash-link" onclick="switchTab('saved', this)">🛒 My Cart</a>
+            <a href="#" class="dash-link" onclick="switchTab('messages', this)">💬 Messages <span class="badge"
+                id="msgNavBadge" style="display:none"></span></a>
+            <a href="#" class="dash-link" onclick="switchTab('settings', this)">⚙️ Profile Settings</a>
+          </nav>
+        </aside>
+        <div class="dash-main">
+          <!-- MY LISTINGS -->
+          <div class="dash-tab active" id="tab-listings">
+            <div class="tab-header">
+              <h2>My Listings</h2>
+              <button class="btn-primary btn-sm" onclick="showPage('sell')">+ New Listing</button>
+            </div>
+            <div id="myListingsGrid" class="my-listings-list"></div>
+          </div>
+          <!-- CART -->
+          <div class="dash-tab" id="tab-saved">
+            <div class="tab-header">
+              <h2>My Cart</h2>
+            </div>
+            <div id="savedGrid" class="products-grid"></div>
+          </div>
+          <!-- MESSAGES -->
+          <div class="dash-tab" id="tab-messages">
+            <div class="tab-header">
+              <h2>Messages</h2>
+              <span id="msgUnreadBadge" class="msg-count-label" style="display:none"></span>
+            </div>
+            <div id="messagesList"></div>
+          </div>
+          <!-- SETTINGS -->
+          <div class="dash-tab" id="tab-settings">
+            <div class="tab-header">
+              <h2>Profile Settings</h2>
+            </div>
+            <form class="settings-form" onsubmit="saveSettings(event)">
+              <div class="form-row">
+                <div class="form-group"><label>First Name</label><input type="text" id="settingFirst"
+                    placeholder="First name" /></div>
+                <div class="form-group"><label>Last Name</label><input type="text" id="settingLast"
+                    placeholder="Last name" /></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>Email</label><input type="email" id="settingEmail" readonly
+                    style="opacity:0.6;cursor:not-allowed" /></div>
+                <div class="form-group"><label>Phone</label><input type="tel" id="settingPhone"
+                    placeholder="+1 (555) 000-0000" /></div>
+              </div>
+              <div class="form-group full"><label>Bio</label><textarea id="settingBio" rows="3"
+                  placeholder="Tell buyers about yourself..."></textarea></div>
+              <div class="form-row">
+                <div class="form-group"><label>Location</label><input type="text" id="settingLocation"
+                    placeholder="City, Country" /></div>
+                <div class="form-group"><label>Member Since</label><input type="text" id="settingMember" readonly
+                    style="opacity:0.6;cursor:not-allowed" /></div>
+              </div>
+              <button type="submit" class="btn-primary">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section><!-- /DASHBOARD -->
+
+    <!-- ==================== ABOUT PAGE ==================== -->
+    <section id="page-about" class="page">
+      <div class="about-hero">
+        <div class="container">
+          <div class="about-hero-badge">Our Mission</div>
+          <h1>Reimagining the EV<br />Parts Economy</h1>
+          <p>We believe every electric vehicle component deserves more than one life. EV ReParts is the infrastructure
+            for a circular EV economy.</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <h2>The Problem We're Solving</h2>
+            <p>Electric vehicles are revolutionizing transport, but there's a hidden problem: when an EV reaches
+              end-of-life or needs major repairs, thousands of still-functional components are discarded. Batteries,
+              motors, and controllers that still have years of life left end up in landfills or are recycled
+              inefficiently.</p>
+            <p>A single EV battery pack contains lithium, cobalt, nickel, and manganese — critical minerals that are
+              expensive and energy-intensive to mine. Discarding them prematurely wastes these resources and contributes
+              to environmental harm.</p>
+            <h2 style="margin-top:2rem">How EV ReParts Helps</h2>
+            <p>Our marketplace creates a trusted secondary market for EV components. By connecting sellers with buyers,
+              we extend the useful life of parts, reduce waste, and make EV ownership more affordable — all while
+              building a community of sustainability-minded enthusiasts.</p>
+          </div>
+          <div class="about-impact">
+            <h3>🌍 Our Environmental Impact</h3>
+            <div class="impact-list">
+              <div class="impact-item"><span class="impact-icon">⚡</span>
+                <div><strong>840 tonnes</strong>
+                  <p>CO₂ equivalent prevented through parts reuse</p>
+                </div>
+              </div>
+              <div class="impact-item"><span class="impact-icon">🔋</span>
+                <div><strong>12,400+</strong>
+                  <p>EV components given a second life</p>
+                </div>
+              </div>
+              <div class="impact-item"><span class="impact-icon">💧</span>
+                <div><strong>2.1M liters</strong>
+                  <p>Water saved vs. manufacturing new parts</p>
+                </div>
+              </div>
+              <div class="impact-item"><span class="impact-icon">🌱</span>
+                <div><strong>60%</strong>
+                  <p>Average cost savings for buyers vs. new OEM parts</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-benefits">
+          <h2>Benefits for Everyone</h2>
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <span>🚗</span>
+              <h3>EV Owners</h3>
+              <p>Access affordable repair parts. Reduce ownership costs. Sell unwanted components easily.</p>
+            </div>
+            <div class="benefit-card">
+              <span>🏭</span>
+              <h3>Repair Shops</h3>
+              <p>Source hard-to-find parts. Build supplier relationships. Reduce repair costs for customers.</p>
+            </div>
+            <div class="benefit-card">
+              <span>♻️</span>
+              <h3>Environment</h3>
+              <p>Fewer parts in landfills. Less mining demand. Lower carbon footprint for the EV sector.</p>
+            </div>
+            <div class="benefit-card">
+              <span>🌐</span>
+              <h3>Community</h3>
+              <p>Connect with fellow EV enthusiasts. Share knowledge. Build a sustainable future together.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-section">
+          <h2>Built by EV Enthusiasts</h2>
+          <div class="team-grid">
+            <div class="team-card">
+              <div class="team-avatar">KK</div><strong>Kshitij Koli</strong><span>CEO & Co-founder</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar">ND</div><strong>Nawfal Deshmukh</strong><span>CTO & Co-founder</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar">JG</div><strong>Jijo George</strong><span>Head of Sustainability</span>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar">JJ</div><strong>Jais Jacob</strong><span>Head of Operations</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hq-section"
+          style="margin-top: 4rem; text-align: center; background: var(--bg-card); padding: 3rem; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
+          <h2>Our Headquarters</h2>
+          <div style="font-size: 2rem; margin: 1rem 0;">🏢</div>
+          <p style="color: var(--text2); line-height: 1.6; max-width: 400px; margin: 0 auto;">
+            <strong>VoltMart Inc.</strong><br />
+            124 Sai Savitri palace, Plot No. 102, Sector 15<br />
+            Juinagar, Navi Mumbai, Maharashtra 400705<br />
+            India
+          </p>
+          <p style="color: var(--text3); margin-top: 1.5rem; font-size: 0.95rem;">
+            Whether you want to geek out over battery chemistries or discuss the future of EV recycling—<br />our doors
+            are always open!
+          </p>
+        </div>
+
+      </div>
+    </section><!-- /ABOUT -->
+
+  </main><!-- /APP -->
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" onclick="showPage('landing')"><span class="logo-icon">⚡</span><span>Volt
+            <strong>Mart</strong></span></a>
+        <p>The trusted marketplace for used electric vehicle parts. Sustainable. Affordable. Reliable.</p>
+        <div class="social-links">
+          <a href="https://x.com/VoltMart" target="_blank" class="social-btn">𝕏</a>
+          <a href="https://linkedin.com/voltmart" target="_blank" class="social-btn">in</a>
+          <a href="https://facebook.com/voltmart" target="_blank" class="social-btn">f</a>
+          <a href="https://youtube.com/voltmart" target="_blank" class="social-btn">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Marketplace</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('browse')">Browse Parts</a></li>
+          <li><a href="#" onclick="showPage('sell')">Sell a Part</a></li>
+          <li><a href="#" onclick="showPage('browse')">Categories</a></li>
+          <li><a href="#">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('about')">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h4>Stay Updated</h4>
+        <p>Get the latest EV parts deals and sustainability news. Join <strong>14,000+</strong> subscribers.</p>
+        <div id="newsletterFormWrap">
+          <div class="newsletter-form">
+            <div class="newsletter-input-wrap">
+              <span class="nl-icon">✉️</span>
+              <input type="email" id="newsletterEmail" placeholder="Enter your email address" />
+            </div>
+            <button class="btn-primary nl-btn" onclick="subscribeNewsletter()">Subscribe →</button>
+          </div>
+          <p class="nl-privacy">🔒 No spam, ever. Unsubscribe anytime.</p>
+        </div>
+        <div id="newsletterSuccess" class="newsletter-success" style="display:none">
+          <div class="nl-success-icon">⚡</div>
+          <strong>You're in!</strong>
+          <p>Welcome to the VoltMart community. Check your inbox for a confirmation.</p>
+          <div class="nl-perks">
+            <span>✅ Weekly deals</span>
+            <span>✅ New listings alerts</span>
+            <span>✅ EV news</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 EV ReParts. All rights reserved. Made with ♻️ for the planet.</p>
+    </div>
+  </footer>
+
+  <!-- LOGIN/SIGNUP MODAL -->
+  <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tab-login-btn" onclick="switchModalTab('login')">Login</button>
+        <button class="modal-tab" id="tab-signup-btn" onclick="switchModalTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="modal-login" class="modal-form active">
+        <h2>Welcome back ⚡</h2>
+        <p>Sign in to your VoltMart account</p>
+
+        <!-- Google Sign-In Option -->
+        <div id="g_id_onload" data-client_id="9834706350-q9kk4usoovemko3t64ge2natudess2gj.apps.googleusercontent.com"
+          data-context="signin" data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
+          data-text="signin_with" data-size="large" data-logo_alignment="left"
+          style="margin-bottom: 1rem; display: flex; justify-content: center;"></div>
+        <div style="text-align: center; margin-bottom: 1rem; color: var(--text3); font-size: 0.85rem;">or continue with
+          email</div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" />
+          <span class="form-error" id="err-loginEmail"></span>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" />
+          <span class="form-error" id="err-loginPassword"></span>
+        </div>
+        <div class="form-error" id="err-loginGlobal" style="margin-bottom:0.75rem;font-size:0.85rem;"></div>
+        <button class="btn-primary btn-large" onclick="handleLogin()">Login</button>
+        <p class="modal-foot">Don't have an account? <a href="#" onclick="switchModalTab('signup')">Sign up free</a></p>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="modal-signup" class="modal-form">
+        <h2>Join EV ReParts 🌍</h2>
+        <p>Create your free account in seconds</p>
+
+        <!-- Google Sign-In Option -->
+        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
+          data-text="signup_with" data-size="large" data-logo_alignment="left"
+          style="margin-bottom: 1rem; display: flex; justify-content: center;"></div>
+        <div style="text-align: center; margin-bottom: 1rem; color: var(--text3); font-size: 0.85rem;">or continue with
+          email</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="signupFirst" placeholder="Jijo" />
+            <span class="form-error" id="err-signupFirst"></span>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="signupLast" placeholder="George" />
+            <span class="form-error" id="err-signupLast"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signupEmail" placeholder="you@example.com" />
+          <span class="form-error" id="err-signupEmail"></span>
+        </div>
+        <div class="form-group">
+          <label>Password <small style="color:var(--text3);font-weight:400">(min. 6 characters)</small></label>
+          <input type="password" id="signupPassword" placeholder="Create password" />
+          <span class="form-error" id="err-signupPassword"></span>
+        </div>
+        <div class="form-error" id="err-signupGlobal" style="margin-bottom:0.75rem;font-size:0.85rem;"></div>
+        <button class="btn-primary btn-large" onclick="handleSignup()">Create Account</button>
+        <p class="modal-foot">Already have an account? <a href="#" onclick="switchModalTab('login')">Login</a></p>
+      </div>
+
+      <!-- Auth Success State -->
+      <div id="modal-success" class="modal-form auth-success-state">
+        <div class="auth-success-icon">⚡</div>
+        <h2 id="authSuccessTitle">Signed in!</h2>
+        <p id="authSuccessMsg">Welcome back to EV VoltMart.</p>
+        <button class="btn-primary btn-large" onclick="closeModal()">Go to Dashboard →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div id="toast-container"></div>
+
+  <script src="script.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</body>
+
+</html>
